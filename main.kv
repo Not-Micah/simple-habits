@@ -1,0 +1,453 @@
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+<HexChanger>:
+    size_hint: 1, None
+    height: dp(125)
+    orientation: "vertical"
+    spacing: dp(5)
+
+    MDTextField:
+        id: entry
+        hint_text: "Enter Hex (e.g. FFFFFF)"
+        max_text_length: 6
+
+    MDBoxLayout:
+        size_hint: 1, 0.25
+        padding: dp(10), dp(15)
+        spacing: dp(10)
+
+        MDRaisedButton:
+            text: "Save"
+            pos_hint: {"center_x": .075, "center_y":.5}
+            on_press: app.change_color(entry.text)
+
+        MDFlatButton:
+            text: "Cancel"
+            on_press: app.hex_dialog.dismiss()
+            pos_hint: {"center_x": .3, "center_y":.5}
+    
+<IconSlider>:
+    size_hint: 1, None
+    height: dp(260)
+    orientation: "vertical"
+
+    Carousel:
+        id: slider 
+        size_hint: 1, 1
+        
+        MDGridLayout:
+            md_bg_color: "#F5F5F5"
+            spacing: dp(15), dp(30)
+            id: page_one
+            rows: 3
+            cols: 4
+
+        MDGridLayout:
+            md_bg_color: "#F5F5F5"
+            spacing: dp(15), dp(30)
+            id: page_two
+            rows: 3
+            cols: 4
+
+        MDGridLayout:
+            md_bg_color: "#F5F5F5"
+            spacing: dp(15), dp(30)
+            id: page_three
+            rows: 3
+            cols: 4
+        
+        MDGridLayout:
+            md_bg_color: "#F5F5F5"
+            spacing: dp(15), dp(30)
+            id: page_four
+            rows: 3
+            cols: 4
+
+        MDGridLayout:
+            md_bg_color: "#F5F5F5"
+            spacing: dp(15), dp(30)
+            id: page_five
+            rows: 3
+            cols: 4
+
+
+    MDFlatButton:
+        text: "Cancel"
+        on_press: app.icon_dialog.dismiss()
+
+<DayButton>:
+    id: btn
+    color: "#808080"
+    background_color: [0, 0, 0, 0]
+    on_press: app.click_day(btn)
+
+<EditHabit>:
+    size_hint: 1, None
+    height: dp(375)
+    orientation: "vertical"
+    spacing: dp(5)
+
+    MDBoxLayout:
+        size_hint: 1, .25
+
+        MDTextField:
+            hint_text: "Habit Name"
+            id: habit
+            max_text_length: 20
+
+    MDBoxLayout:
+        size_hint: 1, .25
+        orientation: "vertical"
+
+        MDLabel:
+            text: "Days:"
+            color: "#A7A7A7"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+
+            DayButton:
+                id: monday
+                text: "M"
+
+            DayButton:
+                id: tuesday
+                text: "T"
+
+            DayButton:
+                id: wednesday
+                text: "W"
+
+            DayButton:
+                id: thursday
+                text: "T"
+
+            DayButton:
+                id: friday
+                text: "F"
+
+            DayButton:
+                id: saturday
+                text: "S"
+
+            DayButton:
+                id: sunday
+                text: "S"
+    
+    MDBoxLayout:
+        size_hint: 1, .25
+
+        MDTextField:
+            hint_text: "Frequency Per Day"
+            id: frequency
+            input_filter: 'int'
+            max_text_length: 2
+
+    MDBoxLayout:
+        size_hint: 1, .25
+
+        MDTextField:
+            hint_text: "Hex Color (Softer Colors Better)"
+            id: color
+            text: "B19CD9"
+            max_text_length: 6
+    
+    MDBoxLayout:
+        size_hint: 1, 0.25
+        padding: dp(10), dp(15)
+        spacing: dp(10)
+
+        MDRaisedButton:
+            text: "Save"
+            elevation: 0
+            on_press: app.edit_habit()
+            pos_hint: {"center_x": .075, "center_y":.5}
+
+        MDFlatButton:
+            text: "Cancel"
+            on_press: app.edit_dialog.dismiss()
+            pos_hint: {"center_x": .3, "center_y":.5}
+
+        MDIconButton:
+            theme_icon_color: "Custom"
+            icon: "trash-can-outline"
+            icon_color: "#ff0000"
+            on_release: app.delete_habit()
+            pos_hint: {"center_x": .9, "center_y":.5}
+
+
+<CreateHabit>:
+    size_hint: 1, None
+    height: dp(375)
+    orientation: "vertical"
+    spacing: dp(5)
+
+    MDBoxLayout:
+        size_hint: 1, .25
+
+        MDTextField:
+            hint_text: "Habit Name"
+            text: ""
+            id: habit
+            max_text_length: 20
+
+    MDBoxLayout:
+        size_hint: 1, .25
+        orientation: "vertical"
+
+        MDLabel:
+            text: "Days:"
+            color: "#A7A7A7"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+
+            DayButton:
+                id: monday
+                text: "M"
+
+            DayButton:
+                id: tuesday
+                text: "T"
+
+            DayButton:
+                id: wednesday
+                text: "W"
+
+            DayButton:
+                id: thursday
+                text: "T"
+
+            DayButton:
+                id: friday
+                text: "F"
+
+            DayButton:
+                id: saturday
+                text: "S"
+
+            DayButton:
+                id: sunday
+                text: "S"
+
+    MDBoxLayout:
+        size_hint: 1, .25
+
+        MDTextField:
+            hint_text: "Frequency Per Day"
+            id: frequency
+            input_filter: 'int'
+            max_text_length: 2
+
+    MDBoxLayout:
+        size_hint: 1, .25
+
+        MDTextField:
+            hint_text: "Hex Color (Softer Colors Better)"
+            id: color
+            text: "B19CD9"
+            max_text_length: 6
+    
+    MDBoxLayout:
+        size_hint: 1, 0.25
+        padding: dp(10), dp(15)
+        spacing: dp(10)
+
+        MDRaisedButton:
+            text: "Save"
+            elevation: 0
+            on_press: app.create_habit()
+            pos_hint: {"center_x": .075, "center_y":.5}
+
+        MDFlatButton:
+            text: "Cancel"
+            on_press: app.create_dialog.dismiss()
+            pos_hint: {"center_x": .3, "center_y":.5}
+
+
+<HabitItem>:
+    id: name
+
+    on_press: 
+        app.edit_habit_dg(name)
+        app.current_habit = name
+
+    IconRightWidget:
+        id: item_icon
+        icon: "arrow-up"
+        on_press: app.move_up(name)
+
+<CreateItem>:
+    id: create
+    on_press: app.create_habit_dg()
+    text: "+ New"
+    theme_text_color: "Custom"
+    text_color: "#808080"
+
+<HabitCard>:
+    id: card
+    size_hint: 1, None
+    height: dp(95)
+    pos_hint: {"center_x":.5, "center_y":.5}
+
+    MDCard:
+        md_bg_color: "#FFFFFF"
+        size_hint: 1, 1
+        pos_hint: {"center_x":.5, "center_y":.5}       
+        on_press:  app.click_habit(card)     
+
+    MDCard: 
+        id: card_completion
+        opacity: 0.5
+        size_hint: 0, 1
+        pos_hint: {"x":0, "center_y":.5}  
+        on_press:  app.click_habit(card)     
+
+    MDBoxLayout:
+        size_hint: 1, 1
+        orientation: "horizontal"
+        padding: dp(25), dp(25)
+        pos_hint: {"center_x":.5, "center_y":.5}
+        spacing: dp(15)
+
+        MDIconButton:
+            id: card_icon
+            pos_hint: {"center_x":.5, "center_y":.5}
+            ripple_scale: 0
+            # icon_size: "40sp"
+            on_press: 
+                app.current_habit = card
+                app.icon_dialog.open()
+
+        MDLabel:
+            id: card_label
+            font_name: "Roboto-Medium.ttf"
+            font_color: "#212121"  
+            font_size: dp(20.5)
+
+        MDLabel:   
+            id: counter
+            id: card_fraction
+            font_name: "Roboto-Medium.ttf"
+            font_color: "#212121"
+            font_size: dp(14)
+            padding: dp(20), dp(0)
+            halign: "right"   
+
+MDScreen:
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDBottomNavigation:
+        id: navigation
+        transition: SlideTransition
+        transition_duration: .5
+        panel_color: "#FFFFFF"
+        opacity: 0
+        text_color_active: "#202228"
+
+        MDBottomNavigationItem:
+            icon: "account"
+            text: "Habits"
+            name: "screen 1"
+
+            # main container / section
+            MDBoxLayout:
+                orientation: "vertical"
+                md_bg_color: "#FFFFFF"
+
+            # header section -> card as container
+                MDCard:
+                    id: home_header
+                    size_hint: 1, .2
+                    elevation: 0
+                    md_bg_color: "#FFFFFF"
+
+            # main container within the card
+                    MDBoxLayout:
+                        size_hint: 1, 1
+                        orientation: "vertical"
+
+                        MDBoxLayout:
+                            size_hint: 1, .2
+
+                        MDBoxLayout:
+                            size_hint: 1, .2
+                            padding: dp(30), dp(0)
+
+                            MDLabel:
+                                font_name: "Roboto-Regular.ttf"
+                                color: "#5A5A5A"
+                                id: home_date
+                                font_size: dp(15)
+
+                        MDBoxLayout:
+                            size_hint: 1, .4
+                            padding: dp(30), dp(0)
+
+                            MDLabel:
+                                id: home_count
+                                markup: True
+                                font_name: "Roboto-Medium.ttf"
+                                font_size: dp(32.5)
+                                halign: "left"
+
+                        MDBoxLayout:
+                            size_hint: 1, .2
+
+            # container for scrollable habits
+                MDBoxLayout:
+                    size_hint: 1, .8
+                    pading: dp(10)
+                    pos_hint: {"center_x":.5}
+                    orientation: "vertical"
+                    md_bg_color: "#ECEFF6"
+                    
+                    ScrollView:
+                        MDGridLayout:
+                            id: card_holder
+                            cols: 1
+                            padding: dp(12.5), dp(17.5)
+                            spacing: dp(15)
+                            size_hint_y: None
+                            height: self.minimum_height
+
+        MDBottomNavigationItem:
+            icon: "account-edit"
+            text: "Settings"
+            name: "screen 2"
+
+            # main container / section
+            MDBoxLayout:
+                md_bg_color: "#FFFFFF"
+                orientation: "vertical"
+
+            # taking up space...
+                MDBoxLayout:
+                    size_hint: 1, .05
+
+                MDBoxLayout:
+                    size_hint: 1, .15
+                    pos_hint: {"center_x": .5, "center_y": .925}
+
+                    MDLabel:
+                        text: "Settings"
+                        font_style: "H3"
+                        font_size: dp(35)
+                        pos_hint: {"left":1, "center_y":.5}
+                        padding: dp(50), dp(50)
+                        font_name: "Roboto-Medium.ttf"
+
+
+                MDScrollView:
+                    size_hint: 1, .85
+                    pos_hint: {"center_x": .5, "center_y":.425}
+                    MDList:
+                        id: habit_menu
+
+    
+
